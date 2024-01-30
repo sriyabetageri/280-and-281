@@ -1,0 +1,114 @@
+#VRML_SIM R2022a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.04833151563156386 -0.0012102531136353868 -0.9988306162128575 3.0916388272610114
+  position 1.4223383904639197 0.10279009971291148 0.2826416679039335
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0.2 0 0
+  floorSize 4 4
+  wallThickness 0.03
+  wallHeight 0.2
+}
+DEF SLOPE Solid {
+  translation 0.144088 0 0.340789
+  rotation 0 1 0 0.4
+  children [
+    Shape {
+      appearance OsbWood {
+        textureTransform TextureTransform {
+        }
+      }
+      geometry DEF BOX0 Box {
+        size 1.6 0.4 0.02
+      }
+    }
+  ]
+}
+Robot {
+  translation -0.0296801 -0.00119809 0.527675
+  rotation 0.1388339643176627 0.39682789800948937 0.9073327668023526 1.84626
+  children [
+    Transform {
+      translation 0.00662093 0.0071784 -0.00866019
+      rotation 0.39554598449914646 0.5965099766236692 -0.6983689726319681 -0.5171553071795865
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.466667 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.2
+            radius 0.075
+          }
+        }
+      ]
+    }
+    Accelerometer {
+    }
+    Transform {
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+          consumptionFactor 70
+        }
+        PositionSensor {
+          name "left wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        rotation 1 0 0 0
+        children [
+          DEF Wheel Transform {
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0 0.333333 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.02
+                  radius 0.05
+                }
+              }
+            ]
+          }
+        ]
+        name "left wheel"
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+          consumptionFactor 70
+        }
+        PositionSensor {
+          name "right wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        rotation 1 0 0 0
+        children [
+          USE Wheel
+        ]
+        name "right wheel"
+      }
+    }
+  ]
+  contactMaterial "body"
+}
